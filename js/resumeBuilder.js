@@ -10,13 +10,15 @@ var bio = {
 		"email": "jeremiah.stephan@mail.com",
 		"github": "jeremiahstephan",
 		"twitter": "@JeremiahatWork",
+		"location": "Cleveland, OH",
 	},
+	
 	"welcomeMessage": "Hello!  This is a place for a welcome message.",
 	"skills": ["HTML", "CSS", "JavaScript", "Jquery", "AJAX", "Java"],
-	"bioPic": "images/fry.jpg"
+	"bioPic": "http://placehold.it/300x300"
 };
 
-function displayMyBio() {
+bio.display = function() {
 	
 	//Role
 	var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
@@ -65,7 +67,7 @@ function displayMyBio() {
 	
 };
 
-displayMyBio();  //envoke the code!
+bio.display();
 
 /***************************
 WORK EXPERIENCE SECTION
@@ -83,21 +85,21 @@ var work = {
 		{
 			"employer": "Somewhat Impressive Employer",
 			"title": "Middle Management Title",
-			"location": "10/2011 to 10/2013",
-			"dates": "dates here2",
+			"location": "Houston, TX",
+			"dates": "10/2011 to 10/2013",
 			"description": "At this VERY important job, I do many things that are highly relevant to the new job I desperately want.  Although I do all the things in this description, chances I only to a handfull of these impressive tasks on a weekly basis. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
 		},
 		{
 			"employer": "First Adult Job",
 			"title": "Bottom of the Company Title",
-			"location": "Chicago, IL",
+			"location": "Seattle, WA",
 			"dates": "8/2005 to 10/2011",
 			"description": "At this VERY important job, I do many things that are highly relevant to the new job I desperately want.  Although I do all the things in this description, chances I only to a handfull of these impressive tasks on a weekly basis. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
 		}
 	]
 };
 
-function displayMyWork() {
+work.display = function() {
 	for (job in work.jobs) {
 	    $("#workExperience").append(HTMLworkStart);
 	    var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
@@ -111,7 +113,7 @@ function displayMyWork() {
 	}
 };
 
-displayMyWork(); 
+work.display();
 
 /***************************
 PROJECTS SECTION
@@ -123,20 +125,20 @@ var projects = {
 			"title": "First Unimpressive Project #1",
 			"date": "10/2015",
 			"description": "A small project using basic skills.",
-			"image": "http://placehold.it/400x150"
+			"images": ["http://placehold.it/300x150", "http://placehold.it/400x150"]
 		},
 		{
 			"title": "Interesting Project #2",
 			"date": "11/2015",
 			"description": "A larger project using intermediate skills.  This one is worth looking at, briefly.",
-			"image": "http://placehold.it/300x150", 
+			"images": ["http://placehold.it/200x150", "http://placehold.it/220x150", "http://placehold.it/210x150"]
 		}
 		,
 		{
 			"title": "Impressive Project #3",
 			"date": "11/2015",
 			"description": "A large project using concerningly advanced skills.  How did he do this?  Is this even possible using modern technology?",
-			"image": "http://placehold.it/550x150"
+			"images": ["http://placehold.it/175x150", "http://placehold.it/215x150", "http://placehold.it/219x150"]
 		}
 	]
 };
@@ -153,18 +155,13 @@ projects.display = function() {
 		
 		var formattedDescription = HTMLprojectDescription.replace("%data%", projects.projects[project].description);
 		$(".project-entry:last").append(formattedDescription);
-
-		var formattedImage = HTMLprojectImage.replace("%data%", projects.projects[project].image);
-		$(".project-entry:last").append(formattedImage);
-		
-		/*
+				
 		if (projects.projects[project].images.length > 0) {
 			for (image in projects.projects[project].images) {
 				var formattedImage = HTMLprojectImage.replace("%data%", projects.projects[project].images[image]);
 				$(".project-entry:last").append(formattedImage);
 			}
 		}
-		*/
 	}
 };
 
@@ -178,19 +175,28 @@ var education = {
 	"schools": [
 		{
 			"name": "Impressive Graduate School",
-			"city": "Chicago",
+			"location": "Denver, CO",
 			"major": "Highly Relevant Graduate Degree",
-			"minor": "None",
 			"graduation": 2013,
 			"courses": ["JavaScript", "CSS"]
 		},
 		{
 			"name": "Less Impressive Small University",
-			"city": "Chicago",
+			"location": "Moscow, ID",
 			"major": "Unrelated field with no job prospects",
-			"minor": "Philosophy",
-			"graduation": 2003,
-			"courses": ["JavaScript", "CSS"]
+			"graduation": 2003
+		},
+		{
+			"name": "Normal Community College",
+			"location": "New York City, NY",
+			"major": "Oops Never Finished!",
+			"graduation": 2001
+		},
+		{
+			"name": "NoWhereVille High School",
+			"location": "Gary, IN",
+			"major": "Just barely finished",
+			"graduation": 1801
 		}
 	],
 	"onlineCourses": [
@@ -215,18 +221,18 @@ var education = {
 	]
 };
 
-function displayMyEducation() {
+education.display = function() {
 	for (school in education.schools) {
 	    $("#education").append(HTMLschoolStart);
 	    
 	    var formattedSchoolName = HTMLschoolName.replace("%data%", education.schools[school].name);
-		$(".education-entry").append(formattedSchoolName);
+		$(".education-entry:last").append(formattedSchoolName);
 
-		var formattedSchoolCity = HTMLschoolDegree.replace("%data%", education.schools[school].major);
-		$(".education-entry").append(formattedSchoolCity);
+		var formattedSchoolMajor = HTMLschoolDegree.replace("%data%", education.schools[school].major);
+		$(".education-entry:last").append(formattedSchoolMajor);
 
 		var formattedSchoolGrad = HTMLschoolDates.replace("%data%", education.schools[school].graduation);
-		$(".education-entry").append(formattedSchoolGrad);
+		$(".education-entry:last").append(formattedSchoolGrad);
 	}
 
 	for (courses in education.onlineCourses) {
@@ -246,9 +252,13 @@ function displayMyEducation() {
 	}
 };
 
-displayMyEducation(); 
+education.display(); 
 
+/***************************
+THE MAP
+***************************/
 
+$("#mapDiv").append(googleMap);
 
 //END
 

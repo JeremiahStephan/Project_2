@@ -1,5 +1,5 @@
 var HTMLheaderName = '<h1 id="name">%data%</h1>';
-var HTMLheaderRole = '<span>%data%</span><hr/>';
+var HTMLheaderRole = '<span id="role1">%data%</span><hr/>';
 
 var HTMLcontactGeneric = '<li class="flex-item"><span class="orange-text">%contact%</span><span class="white-text">%data%</span></li>';
 var HTMLmobile = '<li class="flex-item"><span class="orange-text">mobile</span><span class="white-text">%data%</span></li>';
@@ -44,11 +44,6 @@ var HTMLonlineURL = '<br><a href="#">%data%</a><br>';
 var internationalizeButton = '<button>Internationalize</button>';
 var googleMap = '<div id="map"></div>';
 
-/*********************************
-Undesired Options
-*********************************/
-
-/***
 
 //The International Name challenge in Lesson 2 where you'll create a function that will need this helper code to run. Don't delete! It hooks up your code to the button you'll be appending.
 $(document).ready(function() {
@@ -75,6 +70,7 @@ function logClicks(x,y) {
 
 $(document).click(function(loc) {
   // your code goes here!
+  //logClicks(loc.pageX,loc.pageY);
 });
 
 
@@ -95,7 +91,7 @@ function initializeMap() {
   var locations;
 
   var mapOptions = {
-    disableDefaultUI: true
+    disableDefaultUI: true //removes map controls.
   };
 
   
@@ -229,4 +225,3 @@ window.addEventListener('resize', function(e) {
   map.fitBounds(mapBounds);
 });
 
-***/
